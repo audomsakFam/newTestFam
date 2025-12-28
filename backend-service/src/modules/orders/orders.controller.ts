@@ -1,34 +1,51 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { UpdateOrderDto } from './dto/update-order.dto';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { Role } from '../auth/enum/role.enum';
+import { JwtAuthGuard } from '../auth/guards/jwt/jwt.guard';
+import { RolesGuard } from '../auth/guards/roles/roles.guard';
 
 @Controller('orders')
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(Role.ADMIN, Role.USER)
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Post()
-  create(@Body() createOrderDto: CreateOrderDto) {
+  async createOrder(createOrderDto: CreateOrderDto) {
     return this.ordersService.create(createOrderDto);
   }
 
   @Get()
-  findAll() {
+  @Roles(Role.ADMIN)
+  async getAll() {
     return this.ordersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.ordersService.findOne(+id);
+  @Get(':userId')
+  async getByUserId(@Param('userId') userId: string) {
+    return this.ordersService.findByUserId(userId);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
-    return this.ordersService.update(+id, updateOrderDto);
+  @Put(':id')
+  @Roles(Role.ADMIN)
+  async updateStatus(@Param('id') id: string, @Body() status: string) {
+    return this.ordersService.updateStatus(id, status);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.ordersService.remove(+id);
+  @Roles(Role.ADMIN)
+  async deleteById(@Param('id') id: string) {
+    return this.ordersService.deleteById(id);
   }
 }

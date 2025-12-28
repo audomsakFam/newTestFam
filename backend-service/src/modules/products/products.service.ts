@@ -10,6 +10,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UnitsService } from '../units/units.service';
 import { ProductTypesService } from '../product-types/product-types.service';
+import { SearchService } from '../search/search.service';
 
 @Injectable()
 export class ProductsService {
@@ -17,6 +18,7 @@ export class ProductsService {
     @InjectModel(Product.name) private productModel: Model<ProductDocument>,
     private readonly unitsService: UnitsService,
     private readonly productTypesService: ProductTypesService,
+    private readonly searchService: SearchService,
   ) {}
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
@@ -37,8 +39,24 @@ export class ProductsService {
     }
 
     const createdProduct = new this.productModel(createProductDto);
+    const savedProduct = await createdProduct.save();
+    await this.searchService.indexProduct(savedProduct);
 
-    return createdProduct.save();
+    return savedProduct;
+  }
+
+  async syncAllProducts() {
+    const products = await this.findAll();
+
+    for (const product of products) {
+      await this.searchService.indexProduct(product);
+      console.log(`Synced: ${product.name}`);
+    }
+
+    return {
+      msg: 'Sync completed',
+      count: products.length,
+    };
   }
 
   async findAll(): Promise<Product[]> {

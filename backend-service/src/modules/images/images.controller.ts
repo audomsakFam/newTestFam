@@ -7,14 +7,21 @@ import {
   ParseFilePipe,
   MaxFileSizeValidator,
   FileTypeValidator,
+  UseGuards,
 } from '@nestjs/common';
 import { ImagesService } from './images.service';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { join } from 'path';
 import { emptyDir } from 'fs-extra';
 import sharp from 'sharp';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { Role } from '../auth/enum/role.enum';
+import { JwtAuthGuard } from '../auth/guards/jwt/jwt.guard';
+import { RolesGuard } from '../auth/guards/roles/roles.guard';
 
 @Controller('images')
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(Role.ADMIN)
 export class ImagesController {
   constructor(private readonly imagesService: ImagesService) {}
 

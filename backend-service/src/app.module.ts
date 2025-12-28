@@ -8,13 +8,19 @@ import { UnitsModule } from './modules/units/units.module';
 import { ProductTypesModule } from './modules/product-types/product-types.module';
 import { OrderItemsModule } from './modules/order-items/order-items.module';
 import { UsersModule } from './modules/users/users.module';
-import { RolesModule } from './modules/roles/roles.module';
 import { ImagesModule } from './modules/images/images.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { AuthModule } from './modules/auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+import { SearchModule } from './modules/search/search.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
     MongooseModule.forRoot(
       'mongodb://root:1234@localhost:27017/mystore?authSource=admin',
     ),
@@ -31,8 +37,9 @@ import { join } from 'path';
     ProductTypesModule,
     OrderItemsModule,
     UsersModule,
-    RolesModule,
     ImagesModule,
+    AuthModule,
+    SearchModule,
   ],
   controllers: [AppController],
   providers: [AppService],

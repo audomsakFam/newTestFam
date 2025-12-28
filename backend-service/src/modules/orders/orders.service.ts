@@ -11,6 +11,7 @@ import { UsersService } from '../users/users.service';
 import { OrderItemsService } from '../order-items/order-items.service';
 import { ProductsService } from '../products/products.service';
 import { CreateOrderItemDto } from '../order-items/dto/create-order-item.dto';
+import { Status } from './enum/status.enum';
 
 @Injectable()
 export class OrdersService {
@@ -57,7 +58,7 @@ export class OrdersService {
     const newOrder = new this.orderModel({
       userId: userId,
       totalAmount: totalAmount,
-      status: 'Pending',
+      status: Status.PENDING,
     });
     const savedOrder = await newOrder.save();
 
@@ -89,6 +90,14 @@ export class OrdersService {
       .populate('userId')
       .populate('items')
       .exec();
+    if (!result) {
+      throw new NotFoundException('No orders found');
+    }
+    return result;
+  }
+
+  async findByUserId(userId: string): Promise<Order[]> {
+    const result = await this.orderModel.find({ userId: userId });
     if (!result) {
       throw new NotFoundException('No orders found');
     }

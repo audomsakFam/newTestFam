@@ -5,12 +5,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Product, ProductSchema } from './schema/product.schema';
 import { UnitsModule } from '../units/units.module';
 import { ProductTypesModule } from '../product-types/product-types.module';
+import { SearchModule } from '../search/search.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
     UnitsModule,
     ProductTypesModule,
+    SearchModule,
   ],
   controllers: [ProductsController],
   providers: [ProductsService],
