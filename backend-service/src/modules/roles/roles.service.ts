@@ -1,26 +1,39 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Role, RoleDocument } from './schema/role.schema';
+import { Model } from 'mongoose';
 import { CreateRoleDto } from './dto/create-role.dto';
-import { UpdateRoleDto } from './dto/update-role.dto';
 
 @Injectable()
 export class RolesService {
-  create(createRoleDto: CreateRoleDto) {
-    return 'This action adds a new role';
+  constructor(@InjectModel(Role.name) private roleModel: Model<RoleDocument>) {}
+
+  async create(createdRoleDto: CreateRoleDto): Promise<Role> {
+    const createdRole = new this.roleModel(createdRoleDto);
+    return createdRole.save();
   }
 
-  findAll() {
-    return `This action returns all roles`;
+  async findAll(): Promise<Role[]> {
+    const result = await this.roleModel.find().exec();
+    if (!result) {
+      throw new NotFoundException('No roles found');
+    }
+    return result;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} role`;
+  async findByName(name: string): Promise<Role | null> {
+    const result = await this.roleModel.findOne({ name }).exec();
+    if (!result) {
+      throw new NotFoundException('No roles found');
+    }
+    return result;
   }
 
-  update(id: number, updateRoleDto: UpdateRoleDto) {
-    return `This action updates a #${id} role`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} role`;
+  async deleteByName(name: string): Promise<Role | null> {
+    const result = await this.roleModel.findOneAndDelete({ name }).exec();
+    if (!result) {
+      throw new NotFoundException('No roles found to delete');
+    }
+    return result;
   }
 }
