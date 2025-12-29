@@ -2,16 +2,15 @@
 
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { ReqRegister } from "../auth.type";
 import { authService } from "../auth.service";
 import * as S from "../styles/RegisterForm.style";
 
 const RegisterForm = () => {
   const router = useRouter();
-  const [form, setForm] = useState<ReqRegister>({
+  const [form, setForm] = useState({
     name: "",
     email: "",
-    age: 0,
+    age: "",
     telephone: "",
     password: "",
   });
@@ -41,19 +40,28 @@ const RegisterForm = () => {
     }
 
     try {
-      await authService.register(form);
+      await authService.register({ ...form, age: Number(form.age) });
       alert("Register Success! Please Login.");
       router.push("/login");
     } catch (err: any) {
+      console.error(err);
       setError(err.message || "Something went wrong");
     }
   };
+
   return (
     <S.Container>
       <S.Title>Create Account</S.Title>
       {error && <S.ErrorText>{error}</S.ErrorText>}
 
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <S.Input
           placeholder="Name"
           value={form.name}
@@ -70,7 +78,15 @@ const RegisterForm = () => {
           type="number"
           placeholder="Age"
           value={form.age}
-          onChange={(e) => setForm({ ...form, age: Number(e.target.value) })}
+          onChange={(e) => {
+            const v = e.target.value;
+
+            let cleanV = v === "" ? "" : v.replace(/^0+/, "");
+
+            if (cleanV.length > 3) cleanV = cleanV.slice(0, 3);
+
+            setForm({ ...form, age: cleanV });
+          }}
           required
         />
         <S.Input
