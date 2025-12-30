@@ -31,42 +31,44 @@ const LoginForm = () => {
   };
 
   return (
-    <S.Container>
-      <S.Title>Login</S.Title>
-      {error && <S.ErrorText>{error}</S.ErrorText>}
+    <S.LoginWrapper>
+      <S.Container>
+        <S.Title>Login</S.Title>
+        {error && <S.ErrorText>{error}</S.ErrorText>}
 
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <S.Input
-          placeholder="Email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          required
-        />
-        <S.Input
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-          required
-        />
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <S.Input
+            placeholder="Email"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            required
+          />
+          <S.Input
+            type="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+            required
+          />
 
-        <S.Button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Sign In"}
-        </S.Button>
+          <S.Button type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Sign In"}
+          </S.Button>
 
-        <S.RegisterLink>
-          Don&apos;t have an account?{" "}
-          <Link href={"/pages/register"}>Sign Up</Link>
-        </S.RegisterLink>
-      </form>
-    </S.Container>
+          <S.RegisterLink>
+            Don&apos;t have an account?{" "}
+            <Link href={"/pages/register"}>Sign Up</Link>
+          </S.RegisterLink>
+        </form>
+      </S.Container>
+    </S.LoginWrapper>
   );
 };
 

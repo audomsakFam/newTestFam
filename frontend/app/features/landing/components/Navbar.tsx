@@ -1,41 +1,58 @@
+/* eslint-disable jsx-a11y/alt-text */
 "use client";
+import {
+  SquaresFour,
+  ImageSquare,
+  ClipboardText,
+  ShoppingCart,
+  UserCircle,
+  MagnifyingGlass,
+  Image,
+  DotsThree,
+} from "phosphor-react";
 import * as S from "../styles/Navbar.styles";
 
 export const Navbar = () => {
   return (
     <S.Header>
       <S.Container>
-        {/* Logo */}
         <S.Logo>
           <span>❖</span> XSURFACE
         </S.Logo>
 
-        {/* Search Bar */}
         <S.SearchWrapper>
-          <S.SearchIconLeft>🔍</S.SearchIconLeft>
+          <S.SearchIconLeft>
+            <MagnifyingGlass size={18} />
+          </S.SearchIconLeft>
           <S.SearchInput placeholder="ค้นหาสินค้า" />
-          <S.ImageSearchBtn>📷 ค้นหาด้วยรูป</S.ImageSearchBtn>
+          <S.ImageSearchBtn>
+            <Image size={18} /> ค้นหาด้วยรูป
+          </S.ImageSearchBtn>
         </S.SearchWrapper>
 
-        {/* Menu Items */}
         <S.MenuGroup>
           <S.MenuItem>
-            <span className="icon">🍱</span>คอลเลคชั่น
+            <SquaresFour size={28} />
+            คอลเลคชั่น
           </S.MenuItem>
           <S.MenuItem>
-            <span className="icon">🧱</span>แมททีเรียลอัลบั้ม
+            <ImageSquare size={28} />
+            แมททีเรียลอัลบั้ม
           </S.MenuItem>
           <S.MenuItem>
-            <span className="icon">📋</span>แมททีเรียลบอร์ด
+            <ClipboardText size={28} />
+            แมททีเรียลบอร์ด
           </S.MenuItem>
           <S.MenuItem>
-            <span className="icon">🛒</span>ตะกร้า
+            <ShoppingCart size={28} />
+            ตะกร้า
           </S.MenuItem>
           <S.MenuItem>
-            <span className="icon">👤</span>โปรไฟล์
+            <UserCircle size={28} />
+            โปรไฟล์
           </S.MenuItem>
           <S.LoginButton>Log in</S.LoginButton>
-          <div style={{ cursor: "pointer" }}>•••</div>
+          <DotsThree size={32} />
         </S.MenuGroup>
       </S.Container>
     </S.Header>

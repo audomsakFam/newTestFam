@@ -7,7 +7,6 @@ export const ProductCard = () => {
       <S.ImageArea>
         <S.BadgeLeft>Xclusive Deal</S.BadgeLeft>
         <S.BadgeRight>-50%</S.BadgeRight>
-        {/* ใส่ Image จริงตรงนี้ */}
         <span>IMG</span>
       </S.ImageArea>
 

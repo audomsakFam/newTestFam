@@ -5,7 +5,6 @@ export const Footer = () => {
   return (
     <S.FooterWrapper>
       <S.Container>
-        {/* 1. Logo & Tagline */}
         <S.TopHeader>
           <h2>
             <span>❖</span> XSURFACE
@@ -13,9 +12,7 @@ export const Footer = () => {
           <p>เมื่อวัสดุปิดผิว การตกแต่ง มารวมกันในแพลตฟอร์มที่เน้นการออกแบบ</p>
         </S.TopHeader>
 
-        {/* 2. Main Columns */}
         <S.MainContent>
-          {/* Column 1: Links */}
           <S.Column>
             <h3>เกี่ยวกับเรา</h3>
             <S.LinkList>
@@ -25,7 +22,6 @@ export const Footer = () => {
             </S.LinkList>
           </S.Column>
 
-          {/* Column 2: Contact */}
           <S.Column>
             <h3>ติดต่อเรา</h3>
             <S.ContactInfo>
@@ -43,17 +39,14 @@ export const Footer = () => {
             </S.ContactInfo>
           </S.Column>
 
-          {/* Column 3: CTA */}
           <S.Column>
             <h3>สมัครง่ายๆ ก็ลงขายกับเราได้เลย ฟรี ไม่มีค่าใช้จ่าย</h3>
             <S.CtaButton>ลงขายสินค้ากับเรา</S.CtaButton>
           </S.Column>
         </S.MainContent>
 
-        {/* 3. Bottom Section */}
         <S.BottomBar>
           <S.SocialIcons>
-            {/* ใส่ Icon จริงแทนตัวอักษรได้เลย (เช่น FontAwesome) */}
             <div className="icon-circle">f</div>
             <div className="icon-circle">IG</div>
             <div className="icon-circle">♪</div>

@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { authService } from "../auth.service";
 import * as S from "../styles/RegisterForm.style";
+import { theme } from "@/app/styles/theme";
+import Link from "next/link";
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -50,77 +52,81 @@ const RegisterForm = () => {
   };
 
   return (
-    <S.Container>
-      <S.Title>Create Account</S.Title>
-      {error && <S.ErrorText>{error}</S.ErrorText>}
+    <S.RegisterWrapper>
+  <S.Container>
+    <S.Title>Create Account</S.Title>
+    {error && <S.ErrorText>{error}</S.ErrorText>}
 
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%"
+      }}
+    >
+      <S.Input
+        placeholder="Full Name"
+        value={form.name}
+        onChange={(e) => setForm({ ...form, name: e.target.value })}
+        required
+      />
+      <S.Input
+        placeholder="Email Address"
+        value={form.email}
+        onChange={(e) => setForm({ ...form, email: e.target.value })}
+        required
+      />
+      <S.Input
+        type="number"
+        placeholder="Age"
+        value={form.age}
+        onChange={(e) => {
+          const v = e.target.value;
+          let cleanV = v === "" ? "" : v.replace(/^0+/, "");
+          if (cleanV.length > 3) cleanV = cleanV.slice(0, 3);
+          setForm({ ...form, age: cleanV });
         }}
-      >
-        <S.Input
-          placeholder="Name"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          required
-        />
-        <S.Input
-          placeholder="Email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          required
-        />
-        <S.Input
-          type="number"
-          placeholder="Age"
-          value={form.age}
-          onChange={(e) => {
-            const v = e.target.value;
+        required
+      />
+      <S.Input
+        type="tel"
+        placeholder="Telephone number"
+        value={form.telephone}
+        maxLength={10}
+        onChange={handleChangeTelephone}
+        required
+      />
+      <S.Input
+        type="password"
+        placeholder="Password"
+        value={form.password}
+        onChange={(e) => setForm({ ...form, password: e.target.value })}
+        required
+      />
+      <S.Input
+        type="password"
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        onChange={(e) => setConformPassword(e.target.value)}
+        style={{
+          borderColor:
+            confirmPassword && form.password !== confirmPassword
+              ? theme.colors.primary // ใช้สีแดงจากธีมแทนคำว่า 'red'
+              : undefined,
+        }}
+        required
+      />
 
-            let cleanV = v === "" ? "" : v.replace(/^0+/, "");
+      <S.Button type="submit">Register</S.Button>
 
-            if (cleanV.length > 3) cleanV = cleanV.slice(0, 3);
-
-            setForm({ ...form, age: cleanV });
-          }}
-          required
-        />
-        <S.Input
-          type="tel"
-          placeholder="Telephone number (Digits only)"
-          value={form.telephone}
-          maxLength={10}
-          onChange={handleChangeTelephone}
-          required
-        />
-        <S.Input
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-          required
-        />
-        <S.Input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConformPassword(e.target.value)}
-          style={{
-            borderColor:
-              confirmPassword && form.password !== confirmPassword
-                ? "red"
-                : undefined,
-          }}
-          required
-        />
-
-        <S.Button type="submit">Register</S.Button>
-      </form>
-    </S.Container>
+      <S.LoginLink>
+        Already have an account?{" "}
+        <Link href={"/pages/login"}>Sign In</Link>
+      </S.LoginLink>
+    </form>
+  </S.Container>
+</S.RegisterWrapper>
   );
 };
 

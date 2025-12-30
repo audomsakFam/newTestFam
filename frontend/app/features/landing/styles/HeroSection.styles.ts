@@ -113,39 +113,47 @@ export const RecentList = styled.div`
   scrollbar-width: none; /* Firefox */
 `;
 
-// ปุ่มลูกศร
+
 export const ArrowButton = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  width: 40px;
+  
+  background-color: transparent; 
+  border: none; 
+  box-shadow: none; 
+
+  width: 40px; 
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-size: 1.2rem;
-  color: #333;
+  
+  font-size: 2rem; 
+  color: #aaa; 
   transition: all 0.2s;
 
   &:hover {
-    background-color: #f9f9f9;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    color: #333; 
+    transform: translateY(-50%) scale(1.1); 
   }
 
-  /* ตำแหน่งปุ่ม */
   &.left {
-    left: -20px; /* ปรับให้ลอยออกมาด้านนอกเล็กน้อย */
+    left: -100px; 
+    color: red; 
+    &:hover {
+       color: #d00000; 
+    }
   }
 
   &.right {
-    right: -20px; /* ปรับให้ลอยออกมาด้านนอกเล็กน้อย */
-    color: red; /* สีแดงตามภาพตัวอย่าง */
+    right: -100px;
+    color: red; 
+    &:hover {
+       color: #d00000; 
+    }
   }
 
   /* Responsive: ซ่อนปุ่มถ้าหน้าจอเล็กเกินไป */
@@ -154,7 +162,6 @@ export const ArrowButton = styled.button`
   }
 `;
 
-// Card แบบง่ายสำหรับ Recently Viewed
 export const SimpleCard = styled.div`
   min-width: 160px;
 

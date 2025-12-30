@@ -1,42 +1,58 @@
+import { theme } from "@/app/styles/theme";
 import styled from "styled-components";
+
+export const LoginWrapper = styled.div`
+  display: flex;
+  justify-content: center; /* กึ่งกลางแนวนอน */
+  align-items: center;     /* กึ่งกลางแนวตั้ง */
+  min-height: 100vh;       /* ความสูงเต็มหน้าจอ */
+  background-color: ${theme.colors.bgGray}; /* หรือสีพื้นหลังที่ต้องการ */
+  padding: 20px;
+`;
 
 export const Container = styled.div`
   max-width: 400px;
   width: 100%;
-  margin: 0 auto;
+  /* เอา margin: 0 auto; ออก เพราะเราใช้ Flex จากตัวแม่จัดการแล้ว */
   padding: 2.5rem;
   background: white;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
   text-align: center;
+  border: 1px solid ${theme.colors.border};
 `;
 
 export const Title = styled.h2`
-  mergin-bottom: 2rem;
-  color: #1a1a1a;
+  margin-bottom: 2rem; /* แก้คำผิดจาก mergin เป็น margin */
+  color: ${theme.colors.textMain};
   font-size: 1.8rem;
+  font-weight: 700;
 `;
 
 export const Input = styled.input`
   width: 100%;
   padding: 14px;
   margin-bottom: 1.2rem;
-  border: 1px solid #e1e1e1;
+  border: 1px solid ${theme.colors.border};
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.2s;
+  background-color: #fafafa;
+  transition: all 0.2s;
 
   &:focus {
     outline: none;
-    border-color: #0070f3;
-    box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+    /* เปลี่ยนจากน้ำเงินเป็นสีแดงตามธีม */
+    border-color: ${theme.colors.primary};
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(217, 48, 37, 0.1);
   }
 `;
 
 export const Button = styled.button`
   width: 100%;
   padding: 14px;
-  background-color: #0070f3;
+  /* ใช้สีแดง Primary */
+  background-color: ${theme.colors.primary};
   color: white;
   border: none;
   border-radius: 8px;
@@ -44,38 +60,48 @@ export const Button = styled.button`
   font-weight: 600;
   cursor: pointer;
   margin-top: 1rem;
-  transition: background 0.2s;
+  transition: all 0.2s;
 
   &:hover {
-    background-color: #0060df;
+    background-color: #b5261d; /* สีแดงเข้มขึ้นเล็กน้อย */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(217, 48, 37, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   &:disabled {
-    background-color: #ccc;
+    background-color: ${theme.colors.textLight};
     cursor: not-allowed;
   }
 `;
 
 export const ErrorText = styled.div`
-  color: #d93025;
-  background-color: #ffe6e6;
-  padding: 10px;
-  border-radius: 6px;
+  /* ใช้สีแดงตัวเดียวกันเพื่อให้คุมโทน */
+  color: ${theme.colors.primary};
+  background-color: #fff5f5;
+  padding: 12px;
+  border-radius: 8px;
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
+  border: 1px solid rgba(217, 48, 37, 0.1);
 `;
 
 export const RegisterLink = styled.p`
   margin-top: 1.5rem;
   font-size: 0.9rem;
-  color: #666;
+  color: ${theme.colors.textLight};
 
   a {
-    color: #0070f3;
+    /* ใช้สีทอง Gold เพื่อให้ดูพรีเมียมเหมือนหัวข้อใน Landing */
+    color: ${theme.colors.textGold};
     text-decoration: none;
     font-weight: 600;
 
     &:hover {
+      color: ${theme.colors.primary};
       text-decoration: underline;
     }
   }

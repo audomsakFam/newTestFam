@@ -7,8 +7,6 @@ export const Collections = () => {
   return (
     <S.Section>
       <S.Container>
-        
-        {/* 1. Collections Header */}
         <S.Header>
           <div>
             <h2>Collections</h2>
@@ -17,21 +15,16 @@ export const Collections = () => {
           <a href="#">คอลเลคชั่นทั้งหมด &gt;</a>
         </S.Header>
 
-        {/* 2. Collections Content (รูปใหญ่ซ้าย + สินค้าขวา) */}
         <S.ContentWrapper>
           <S.LargeImage>
-             {/* ใส่ <img> src="..." alt="Room" /> ตรงนี้ */}
           </S.LargeImage>
           
           <S.ProductList>
-             {/* Reuse ProductCard มาวางตรงนี้ */}
              <ProductCard />
              <ProductCard />
-             {/* เพิ่มปุ่มลูกศรขวาถ้าต้องการ */}
           </S.ProductList>
         </S.ContentWrapper>
 
-        {/* 3. Wallplast Banner */}
         <S.WallplastSection>
            <S.WallplastContent>
               <h2>Wallplast</h2>
@@ -44,7 +37,6 @@ export const Collections = () => {
            </S.WallplastContent>
         </S.WallplastSection>
 
-        {/* 4. Partners */}
         <S.PartnerSection>
           <h3>ร้านค้าที่ร่วมขายกับเรา</h3>
           <S.PartnerGrid>

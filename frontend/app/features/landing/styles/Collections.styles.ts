@@ -1,7 +1,6 @@
 import { theme } from '@/app/styles/theme';
 import styled from 'styled-components';
 
-/* --- ส่วนที่ 1: Collections --- */
 export const Section = styled.section`
   background-color: ${theme.colors.bgCream};
   padding: 60px 0;
@@ -46,12 +45,12 @@ export const Header = styled.div`
 export const ContentWrapper = styled.div`
   display: flex;
   gap: 30px;
-  height: 450px; /* Fix ความสูงเพื่อให้รูปซ้ายกับขวาเท่ากัน */
+  height: 450px; 
 `;
 
 export const LargeImage = styled.div`
-  flex: 1.5; /* กว้างกว่าฝั่งสินค้า */
-  background-color: #ddd; /* รูปห้องตัวอย่าง */
+  flex: 1.5; 
+  background-color: #ddd; 
   border-radius: 20px;
   overflow: hidden;
   position: relative;
@@ -74,7 +73,6 @@ export const ProductList = styled.div`
   &::-webkit-scrollbar { display: none; }
 `;
 
-/* --- ส่วนที่ 2: Wallplast Banner --- */
 export const WallplastSection = styled.div`
   margin-top: 80px;
   position: relative;
@@ -135,7 +133,6 @@ export const WallplastContent = styled.div`
   }
 `;
 
-/* --- ส่วนที่ 3: Partners --- */
 export const PartnerSection = styled.div`
   padding: 60px 0;
   text-align: center;

@@ -25,13 +25,23 @@ export const HeroSection = () => {
   ];
 
   const [currentBanner, setCurrentBanner] = useState(0);
-
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const checkScroll = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
 
   const scroll = (direction: any) => {
     if (scrollRef.current) {
       const { current } = scrollRef;
-      const scrollAmount = 300; // ระยะที่จะเลื่อนต่อการกด 1 ครั้ง (ปรับตามความกว้าง Card)
+      const scrollAmount = 300;
 
       if (direction === "left") {
         current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
@@ -45,24 +55,24 @@ export const HeroSection = () => {
     const timer = setInterval(() => {
       setCurrentBanner((prev) => (prev + 1) % BANNERS.length);
     }, 3000);
-
-    return () => clearInterval(timer);
+    checkScroll();
+    window.addEventListener("resize", checkScroll);
+    return () => {
+      window.removeEventListener("resize", checkScroll);
+      clearInterval(timer);
+    };
   }, []);
 
   return (
     <S.Wrapper>
       <S.Banner>
-        {/* แสดงข้อความตาม State ปัจจุบัน */}
         <h1>{BANNERS[currentBanner].title}</h1>
         <p>{BANNERS[currentBanner].sub}</p>
-
         <S.Indicators>
           {BANNERS.map((_, index) => (
             <div
               key={index}
-              // 3. เช็คว่าถ้า index ตรงกับ currentBanner ให้เติม class 'active'
               className={currentBanner === index ? "active" : ""}
-              // แถม: กดที่ขีดเพื่อข้ามไปหน้านั้นได้
               onClick={() => setCurrentBanner(index)}
               style={{ cursor: "pointer" }}
             />
@@ -71,7 +81,6 @@ export const HeroSection = () => {
       </S.Banner>
 
       <S.Container>
-        {/* 2. Categories */}
         <S.CatGrid>
           {categories.map((cat, index) => (
             <S.CatItem key={index}>
@@ -81,20 +90,15 @@ export const HeroSection = () => {
           ))}
         </S.CatGrid>
 
-        {/* 3. Recently Viewed */}
         <S.RecentSection>
           <h2>ดูล่าสุด</h2>
-
-          {/* Wrapper เพื่อใช้สำหรับวางตำแหน่งลูกศร */}
           <S.SliderContainer>
-            {/* ปุ่มซ้าย */}
-            <S.ArrowButton className="left" onClick={() => scroll("left")}>
-              {/* ใช้ Icon หรือ Text ก็ได้ */}
-              &lt;
-            </S.ArrowButton>
-
-            <S.RecentList ref={scrollRef}>
-              {/* Mock Items */}
+            {canScrollLeft && (
+              <S.ArrowButton className="left" onClick={() => scroll("left")}>
+                &lt;
+              </S.ArrowButton>
+            )}
+            <S.RecentList ref={scrollRef} onScroll={checkScroll}>
               {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
                 <S.SimpleCard key={item}>
                   <div className="img-box">Product image</div>
@@ -105,11 +109,11 @@ export const HeroSection = () => {
                 </S.SimpleCard>
               ))}
             </S.RecentList>
-
-            {/* ปุ่มขวา */}
-            <S.ArrowButton className="right" onClick={() => scroll("right")}>
-              &gt;
-            </S.ArrowButton>
+            {canScrollRight && (
+              <S.ArrowButton className="right" onClick={() => scroll("right")}>
+                &gt;
+              </S.ArrowButton>
+            )}
           </S.SliderContainer>
         </S.RecentSection>
       </S.Container>

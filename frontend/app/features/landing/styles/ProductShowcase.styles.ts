@@ -63,7 +63,6 @@ export const CardList = styled.div`
   scrollbar-width: none;
 `;
 
-/* ปุ่มลูกศรซ้ายขวา (ทำเป็นวงกลมขาว) */
 export const NavButton = styled.button`
   width: 40px;
   height: 40px;
@@ -76,7 +75,7 @@ export const NavButton = styled.button`
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  color: #333;
+  color: red;
   z-index: 2;
   
   /* วางตำแหน่ง Absolute เทียบกับ SliderWrapper */
@@ -84,8 +83,8 @@ export const NavButton = styled.button`
   top: 50%;
   transform: translateY(-50%);
   
-  &.prev { left: -20px; }
-  &.next { right: -20px; }
+  &.prev { left: -70px; }
+  &.next { right: -70px; }
   
   &:hover { background: #f5f5f5; }
 `;
