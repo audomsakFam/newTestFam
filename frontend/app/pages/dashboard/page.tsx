@@ -1,15 +1,18 @@
 "use client";
 import { SideBar } from "@/app/ui/dashboard";
 
-const DashBoard = () => {
+const DashBoard = ({ children }: { children: React.ReactNode }) => {
   const menus = [
-    { id: "home", label: "Dashboard" },
-    { id: "profile", label: "Profile" },
-    { id: "settings", label: "Settings" },
+    { id: "/pages/dashboard/home", label: "Dashboard" },
+    { id: "/pages/dashboard/profile", label: "Profile" },
+    { id: "/pages/dashboard/settings", label: "Settings" },
   ];
   return (
-    <div style={{ backgroundColor: "#212c25ff" }}>
+    <div style={{ backgroundColor: "#212c25ff", display: "flex" }}>
       <SideBar options={menus}></SideBar>
+      <main style={{ flex: 1, padding: "20px", overflowY: "auto" }}>
+        {children}
+      </main>
     </div>
   );
 };

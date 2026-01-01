@@ -13,15 +13,28 @@ export const Containar = styled.div`
   align-items: flex-end;
 `;
 
+export const Header = styled.h1`
+  width: 300px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  padding: 5px;
+  gap: 4px;
+
+  cursor: pointer;
+`;
+
 export const Options = styled.p<ActiveOptionProps>`
-  width: 260px;
+  width: 270px;
   color: #fff;
   font-size: 18px;
   padding: 16px;
   transition: all 0.3s ease; /* เพิ่มความลื่นไหลตอนเปลี่ยนสถานะ */
   cursor: pointer;
 
-   &:hover {
+  &:hover {
     background-color: #ffffff23;
   }
 

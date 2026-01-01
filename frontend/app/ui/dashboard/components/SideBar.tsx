@@ -1,5 +1,7 @@
-import { useState } from "react";
 import * as S from "../styles/SideBar.style";
+import { ChartPie } from "phosphor-react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 type OptionItem = {
   id: string;
@@ -10,18 +12,20 @@ type Props = {
   options: OptionItem[];
 };
 const SideBar = ({ options }: Props) => {
-  const [isActive, setIsActive] = useState("home");
+  const pathname = usePathname();
   return (
     <S.Containar>
+      <Link href={options[0].id} style={{ textDecoration: "none" }}>
+        <S.Header>
+          <ChartPie size={40} />
+          test
+        </S.Header>
+      </Link>
       {options &&
         options.map((item) => (
-          <S.Options
-            key={item.id}
-            $isActive={isActive === item.id}
-            onClick={() => setIsActive(item.id)}
-          >
-            {item.label}
-          </S.Options>
+          <Link href={item.id} key={item.id} style={{ textDecoration: "none" }}>
+            <S.Options $isActive={pathname === item.id}>{item.label}</S.Options>
+          </Link>
         ))}
     </S.Containar>
   );
