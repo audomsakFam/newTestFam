@@ -4,7 +4,7 @@ import { SideBar } from "@/app/ui/dashboard";
 const DashBoard = ({ children }: { children: React.ReactNode }) => {
   const menus = [
     { id: "/pages/dashboard/home", label: "Dashboard" },
-    { id: "/pages/dashboard/profile", label: "Profile" },
+    { id: "/pages/dashboard/product", label: "Product" },
     { id: "/pages/dashboard/settings", label: "Settings" },
   ];
   return (

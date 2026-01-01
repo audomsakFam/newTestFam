@@ -33,8 +33,8 @@ const generateEmptySlots = (count: number): IDashboardCard[] => {
 
 const ContentHome = () => {
   const [cards, setCards] = useState<IDashboardCard[]>([
-    { id: "1", type: "STAT_USER", title: "Total User", w: 8, h: 3 },
-    ...generateEmptySlots(5),
+    // { id: "1", type: "STAT_USER", title: "Total User", w: 8, h: 3 },
+    ...generateEmptySlots(6),
   ]);
   const [isMounted, setIsMounted] = useState(false);
 

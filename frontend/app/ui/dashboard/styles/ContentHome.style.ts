@@ -33,6 +33,4 @@ export const Grid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
   grid-auto-rows: 75px;
   gap: 20px;
-
-  
 `;

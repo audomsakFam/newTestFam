@@ -1,37 +1,59 @@
-import React from 'react';
-import * as S from '../styles/ProductCard.styles';
+import { IProductData } from "@/app/types/product.type";
+import * as S from "../styles/ProductCard.styles";
 
-export const ProductCard = () => {
+export const ProductCard = ({ data }: { data: IProductData }) => {
   return (
     <S.Card>
       <S.ImageArea>
-        <S.BadgeLeft>Xclusive Deal</S.BadgeLeft>
-        <S.BadgeRight>-50%</S.BadgeRight>
-        <span>IMG</span>
+        {/* แสดง Badge เฉพาะเมื่อมีข้อมูล */}
+        {data.badgeText && <S.BadgeLeft>{data.badgeText}</S.BadgeLeft>}
+        {data.discountPercent && (
+          <S.BadgeRight>-{data.discountPercent}%</S.BadgeRight>
+        )}
+
+        {data.image ? (
+          <img src={data.image} alt={data.title} />
+        ) : (
+          <span>IMG</span>
+        )}
       </S.ImageArea>
 
       <S.Content>
         <S.TitleRow>
-          <h4>FUVAL (Silver)...</h4>
+          <h4>{data.title}</h4>
           <button>+</button>
         </S.TitleRow>
 
         <S.MetaRow>
-          <span className="code">CODE12345678</span>
-          <span className="views">👁 1000</span>
+          <span className="code">{data.productCode}</span>
+          <span className="views">👁 {data.viewCount.toLocaleString()}</span>
         </S.MetaRow>
 
         <S.Specs>
-          <p>กระจก</p>
-          <p>W60 x H100 x D4.5 cm.</p>
+          {/* ใช้ map เพื่อรองรับจำนวน Specs ที่ไม่เท่ากันในแต่ละสินค้า */}
+          {data.specs.map((spec, index) => (
+            <p key={index}>{spec}</p>
+          ))}
         </S.Specs>
 
         <S.Footer>
           <S.PriceBlock>
-            <span className="old-price">฿990.00</span>
-            <span className="new-price">฿550 <small>/ตร.ม.</small></span>
+            {/* ถ้าไม่มีส่วนลด ไม่ต้องแสดงราคาเก่า */}
+            {data.oldPrice > data.newPrice && (
+              <span className="old-price">
+                ฿{data.oldPrice.toLocaleString()}
+              </span>
+            )}
+            {/* <S.PriceInfo>
+              <span className="new-price">฿{data.newPrice.toLocaleString()}</span>
+              <small>{data.priceUnit}</small>
+            </S.PriceInfo> */}
           </S.PriceBlock>
-          <S.StockStatus>In stock</S.StockStatus>
+
+          {/* เปลี่ยนสีตามสถานะสต็อก  $inStock={data.isInStock}*/}
+          <S.StockStatus>
+            {data.isInStock ? "In stock" : "Out of stock"}
+          </S.StockStatus>
         </S.Footer>
       </S.Content>
     </S.Card>

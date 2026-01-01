@@ -3,7 +3,7 @@ import { theme } from '@/app/styles/theme';
 
 export const Card = styled.div`
   background: white;
-  width: 250px; 
+  width: 240px; 
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
