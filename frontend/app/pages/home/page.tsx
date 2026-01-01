@@ -7,7 +7,7 @@ import {
   Navbar,
   ProductShowcase,
   HeroSection
-} from "../../features/landing/index";
+} from "../../ui/landing/index";
 
 export default function LandingPage() {
   return (

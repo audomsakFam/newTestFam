@@ -1,9 +1,10 @@
-import LandingPage from "./pages/home/page";
-// import LoginPage from "./pages/login/page";
+// import LandingPage from "./pages/home/page";
+
+import DashBoard from "./pages/dashboard/page";
 
 export default function Home() {
   return (
-    //  <LoginPage />
-     <LandingPage />
+    <DashBoard />
+    //  <LandingPage />
   );
 }
