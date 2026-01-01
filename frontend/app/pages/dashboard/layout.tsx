@@ -8,9 +8,24 @@ const DashBoard = ({ children }: { children: React.ReactNode }) => {
     { id: "/pages/dashboard/settings", label: "Settings" },
   ];
   return (
-    <div style={{ backgroundColor: "#212c25ff", display: "flex" }}>
+    <div
+      style={{
+        backgroundColor: "#212c25ff",
+        display: "flex",
+        height: "100vh",
+        width: "100vw",
+        overflow: "hidden",
+      }}
+    >
       <SideBar options={menus}></SideBar>
-      <main style={{ flex: 1, padding: "20px", overflowY: "auto" }}>
+      <main
+        style={{
+          flex: 1,
+          padding: "20px",
+          overflowY: "auto", 
+          height: "100%",
+        }}
+      >
         {children}
       </main>
     </div>

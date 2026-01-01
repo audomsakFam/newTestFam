@@ -1,10 +1,10 @@
 // import LandingPage from "./pages/home/page";
 
-import DashBoard from "./pages/dashboard/page";
+import DashBoard from "./pages/dashboard/layout";
 
-export default function Home() {
+export default function Home({ children }: { children: React.ReactNode }) {
   return (
-    <DashBoard />
+    <DashBoard>{children}</DashBoard>
     //  <LandingPage />
   );
 }

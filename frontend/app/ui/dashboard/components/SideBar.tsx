@@ -18,7 +18,7 @@ const SideBar = ({ options }: Props) => {
       <Link href={options[0].id} style={{ textDecoration: "none" }}>
         <S.Header>
           <ChartPie size={40} />
-          test
+          Dashboard
         </S.Header>
       </Link>
       {options &&
